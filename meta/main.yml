@@ -1,6 +1,6 @@
 ---
   galaxy_info:
-    role_name: basics
+    role_name: bashrc
     author: ckaserer
     description: "colorful and useful bashrc"
     company: "Gepardec IT Services GmbH"
