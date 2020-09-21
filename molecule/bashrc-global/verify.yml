@@ -26,19 +26,6 @@
         register: verify_current_user_bashrc
         failed_when: not verify_current_user_bashrc.changed
 
-      - name: Check that /opt/bashrc is not present in Users .bashrc
-        blockinfile:
-          path: /home/{{ item }}/.bashrc
-          block: |
-            if [ -f /opt/bashrc/bashrc ]; then
-            . /opt/bashrc/bashrc
-            fi
-        check_mode: yes
-        with_items:
-          - root
-        register: verify_users_bashrc
-        failed_when: not verify_users_bashrc.changed
-
       - name: Check that /etc/bashrc contains /opt/bashrc/bashrc
         blockinfile:
           path: /etc/bashrc
