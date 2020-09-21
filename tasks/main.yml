@@ -1,0 +1,52 @@
+---
+  - name: Find latest bashrc release
+    uri:
+      url: https://api.github.com/repos/ckaserer/bash-bashrc/releases/latest
+      return_content: true
+    register: json_reponse
+
+  - name: Get latest bashrc release tar.gz
+    get_url:
+      url: "{{ json_reponse.json.tarball_url }}"
+      dest: /tmp/bash-bashrc.tar.gz
+
+  - name: Set bashrc location
+    set_fact:
+      bashrc_folder: "{{ '/opt/bashrc' if bashrc_global else '~/.custom-bashrc' }}"
+
+  - name: Bashrc folder location
+    debug:
+      var: bashrc_folder
+
+  - name: Create bashrc folder
+    file:
+      path: "{{ bashrc_folder }}"
+      state: directory
+      mode: '0755'
+
+  - name: Unarchive bashrc.tar.gz
+    unarchive:
+      src: /tmp/bash-bashrc.tar.gz
+      dest: "{{ bashrc_folder }}"
+      remote_src: yes
+      extra_opts: [--strip-components=1]
+      mode: '0755'
+
+  - name: Add bashrc to current user
+    blockinfile:
+      path: ~/.bashrc
+      block: |
+        if [ -f {{ bashrc_folder }}/bashrc ]; then
+          . {{ bashrc_folder }}/bashrc
+        fi
+    when: not bashrc_global
+
+  - name: Add bashrc globally
+    blockinfile:
+      path: "/etc/bashrc"
+      block: |
+          if [ -f {{ bashrc_folder }}/bashrc ]; then
+          . {{ bashrc_folder }}/bashrc
+          fi
+    when: bashrc_global
+...
