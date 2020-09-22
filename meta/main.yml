@@ -22,7 +22,7 @@
           - xenial
       - name: GenericLinux
         versions:
-          - any 
+          - any
 
     galaxy_tags:
       - ubuntu
