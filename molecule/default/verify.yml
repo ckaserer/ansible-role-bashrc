@@ -3,29 +3,29 @@
     hosts: all
     become: true
     tasks:
-      - name: Check that ~/.custom-bashrc/bashrc exists
+      - name: Check that ~/.ckaserer-bashrc/bashrc exists
         stat:
-          path: ~/.custom-bashrc/bashrc
-        register: verify_custom_bashrc
-        failed_when: not verify_custom_bashrc.stat.exists
+          path: ~/.ckaserer-bashrc/bashrc
+        register: verify_bashrc_location_for_user
+        failed_when: not verify_bashrc_location_for_user.stat.exists
 
       - name: Check that global bashrc does not exist
         stat:
           path: /opt/bashrc/bashrc
-        register: verify_global_bashrc
-        failed_when: verify_global_bashrc.stat.exists
+        register: verify_systemwide_bashrc_location
+        failed_when: verify_systemwide_bashrc_location.stat.exists
 
       - name: Check that custom bashrc is present in ~/.bashrc
         blockinfile:
           path: ~/.bashrc
           block: |
-            if [ -f ~/.custom-bashrc/bashrc ]; then
-              . ~/.custom-bashrc/bashrc
+            if [ -f ~/.ckaserer-bashrc/bashrc ]; then
+              . ~/.ckaserer-bashrc/bashrc
             fi
         check_mode: yes
-        register: verify_current_user_bashrc
-        failed_when: verify_current_user_bashrc.changed
-      
+        register: verify_user_bashrc
+        failed_when: verify_user_bashrc.changed
+
       - name: Check that /etc/bashrc does not contain /opt/bashrc/bashrc
         blockinfile:
           path: /etc/bashrc
@@ -34,6 +34,6 @@
             . /opt/bashrc/bashrc
             fi
         check_mode: yes
-        register: verify_etc_bashrc
-        failed_when: not verify_etc_bashrc.changed
+        register: verify_systemwide_bashrc
+        failed_when: not verify_systemwide_bashrc.changed
 ...

@@ -27,6 +27,6 @@ install:
 env:
   jobs:
     - SCENARIO=default
-    - SCENARIO=bashrc-global
+    - SCENARIO=systemwide
 script:
   - molecule test --scenario-name ${SCENARIO}

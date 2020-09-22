@@ -12,11 +12,12 @@
 
   - name: Set bashrc location
     set_fact:
-      bashrc_folder: "{{ '/opt/bashrc' if bashrc_global else '~/.custom-bashrc' }}"
+      bashrc_folder: "{{ '/opt/ckaserer-bashrc' if systemwide else '~/.ckaserer-bashrc' }}"
 
   - name: Bashrc folder location
     debug:
       var: bashrc_folder
+      verbosity: 2
 
   - name: Create bashrc folder
     file:
@@ -39,7 +40,7 @@
         if [ -f {{ bashrc_folder }}/bashrc ]; then
           . {{ bashrc_folder }}/bashrc
         fi
-    when: not bashrc_global
+    when: not systemwide
 
   - name: Add bashrc globally
     blockinfile:
@@ -48,5 +49,5 @@
           if [ -f {{ bashrc_folder }}/bashrc ]; then
           . {{ bashrc_folder }}/bashrc
           fi
-    when: bashrc_global
+    when: systemwide
 ...
