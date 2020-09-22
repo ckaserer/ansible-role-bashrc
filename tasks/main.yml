@@ -1,14 +1,14 @@
 ---
   - name: Find latest bashrc release
     uri:
-      url: https://api.github.com/repos/ckaserer/bash-bashrc/releases/latest
+      url: https://api.github.com/repos/ckaserer/bashrc/releases/latest
       return_content: true
     register: json_reponse
 
   - name: Get latest bashrc release tar.gz
     get_url:
       url: "{{ json_reponse.json.tarball_url }}"
-      dest: /tmp/bash-bashrc.tar.gz
+      dest: /tmp/bashrc.tar.gz
 
   - name: Set bashrc location
     set_fact:
@@ -26,7 +26,7 @@
 
   - name: Unarchive bashrc.tar.gz
     unarchive:
-      src: /tmp/bash-bashrc.tar.gz
+      src: /tmp/bashrc.tar.gz
       dest: "{{ bashrc_folder }}"
       remote_src: yes
       extra_opts: [--strip-components=1]
