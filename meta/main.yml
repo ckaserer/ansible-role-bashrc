@@ -12,9 +12,21 @@
     platforms:
       - name: EL
         versions:
+          - 6
           - 7
+          - 8
+      - name: Ubuntu
+        versions:
+          - bionic
+          - focal
+          - xenial
+      - name: GenericLinux
+        versions:
+          - any 
 
     galaxy_tags:
+      - ubuntu
+      - debian
       - centos
       - rhel
       - gepardec
