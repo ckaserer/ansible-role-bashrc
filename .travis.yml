@@ -1,10 +1,9 @@
----
 version: "~> 1.0"
 os: linux
-dist: bionic
+dist: xenial
 language: python
 python:
-  - "3.6"
+  - '3.6'
 services:
   - docker
 notifications:
@@ -12,15 +11,7 @@ notifications:
     on_success: never
     on_failure: never
   slack:
-    if: branch = master
-    rooms:
-      secure: D077KIlcJyvC4OiM5hoxQFHQB+NmyyVEkLVOJbGDGstoFudBUL4UMX4aCKbF79gk1q6oJd6jz7L4O9MYmDD81KF4ZdZ13VCkQUTtmjRBaIEBvsL0t29QaaT0BfXu76N6DeZz13ua2KQtB2UGkA1Su0NrlscqWpx2GbPgl090bw5bTSXsxYqd+ui+yQZh/QNJ7hgnAwRf3MPdHEWr09SgdP0gmPqegKNWiJi8FgZYSRX5iYAVWIL1YVH0noIAaj2MFgklJzoeAaP1tFkk8O1wuyTbIS/JBa2omm+YbtBcFMWnErNYJQ6g2L5uIj4TvUgvkXgDahnXHRmGB1hPlz9ebYYMIF2snLpgN4xMJFbjpppcLbUhlfPkcOYneZ71cSjrlVdz5x+dv+G3Ut2WenPOJ4VXksLtnMUqy4bCBl+KQfdDmGRFdcMHwPrtr9PhK6PyRpNGOalrA+mPsT3dPwnmGUoL1ImQNHT3oZYIE9aGHWCA3Xx5h5tllrTLQ4cH+hKm4ZsqFkDp7YcS3et6pEidurG1PcGLUgjqCVKGC8tXZh2drn4vyO/vRK86Qe869T77Mu1eIHE8VNMvJYfBx7jP1PsKBxi+yzsii/3Aw6tY4W+yGEG6v/IhID16wV7zoUxKiAjOKnURT2uHHzW09/++9bynDIdcnClgfCztm+jpqk0=
-    template:
-      - "%{commit_subject}"
-      - build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) @%{branch}
-      - by %{author} %{result} in %{duration}
-    on_success: change
-    on_failure: always
+    secure: jUa3+cLKNqclhohsqfdbq+8LXLxvKSsxkgXN+ORMokNlgwH44GSlNmd2m9JL0YoD2ro6U/9nM/qfgD8skEX/xtNthfpR+0mq5fSojR9F5apJaqlfBD1mk28A21X3YHLQR4Cyy0bRO1vB7o3WJFpy7bRc7C9yBL05gkT+gyU9iHUzp575GR4rR7Y82vHKPEn1HmFsdND5DAX1JWNLZW5ppzGZREmbICJJGfesDPCjZbblxnhXKKaY0dJEQyhwx5ECLamxfubxrZJ8dRzAKFmZN3MActO+PXS5TXQWO37UjEhVp9m8tpzsTqFOULz+himfCXWxLr9hC/ZuOLZQuQ7e3892ya9eoU3y3bZ84OWHzC/etQtioW5C27PmsvZkVTen59VGmCx+DBvMGoFJX55F0YfSjJNSI4S0Ujf1bfMXyoDM9k9uwf5m9vMqHI+uBL09Z1s5hrUmgmWoWaxrd7qCXGlq3lWez/bPzCDv0bzjc9qouv/oONUFu1gmsdq/dVlM7ujBXQbpC0WN+3Lbj99SfXNAFWx3e7iCKIrkHbBVgCnpn1l3fiJ7YcTjc7YMikSDcpQgX6QHrpQHFgd7Vot7yQXwSJYrgzsgY0E/nqTx+xpN1Scy4yjvBpMrJl1r5F3NZZKUF2bwMT951yefBTAm+7CA7dIlvq4cpmjjE/b1mPo=
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
 install:
   - pip install -r requirements.txt
@@ -30,4 +21,3 @@ env:
     - SCENARIO=bashrc-global
 script:
   - molecule test --scenario-name ${SCENARIO}
-...
