@@ -5,6 +5,14 @@
       return_content: true
       user: "{{ github_user }}"
       password: "{{ github_token }}"
+      force_basic_auth: "{{ true 
+        if 
+          github_token is defined and 
+          github_user is defined and 
+          github_token != '' and
+          github_user != ''
+        else 
+          false }}"
     register: json_reponse
 
   - name: Get latest bashrc release tar.gz
@@ -13,6 +21,14 @@
       dest: /tmp/bashrc.tar.gz
       username: "{{ github_user }}"
       password: "{{ github_token }}"
+      force_basic_auth: "{{ true 
+      if 
+        github_token is defined and 
+        github_user is defined and 
+        github_token != '' and
+        github_user != ''
+      else 
+        false }}"
 
   - name: Set bashrc location
     set_fact:
