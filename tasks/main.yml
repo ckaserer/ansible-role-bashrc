@@ -1,7 +1,7 @@
 ---
 
   - name: Include macOS specific tasks
-    include_tasks: macos.yaml
+    include_tasks: macos.yml
     when: ansible_distribution == 'MacOSX'
 
   - name: Find latest bashrc release
