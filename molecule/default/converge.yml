@@ -1,7 +1,6 @@
 ---
   - name: Converge
     hosts: all
-    gather_facts: no
     tasks:
       - name: "Include ansible role"
         include_role:

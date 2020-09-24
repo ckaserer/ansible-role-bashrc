@@ -1,4 +1,9 @@
 ---
+
+  - name: Include macOS specific tasks
+    include_tasks: macos.yaml
+    when: ansible_distribution == 'MacOSX'
+
   - name: Find latest bashrc release
     uri:
       url: https://api.github.com/repos/ckaserer/bashrc/releases/latest

@@ -23,6 +23,10 @@
       - name: GenericLinux
         versions:
           - any
+      - name: MacOS
+        versions:
+          - High-Sierra
+          - Sierra
 
     galaxy_tags:
       - ubuntu

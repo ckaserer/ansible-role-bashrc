@@ -1,0 +1,6 @@
+---
+  - name: Install gnu-tar on MacOS
+    homebrew:
+      name: gnu-tar
+      state: present
+...
