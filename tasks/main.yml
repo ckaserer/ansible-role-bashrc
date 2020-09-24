@@ -5,13 +5,13 @@
       return_content: true
       user: "{{ github_user }}"
       password: "{{ github_token }}"
-      force_basic_auth: "{{ true 
-        if 
-          github_token is defined and 
-          github_user is defined and 
-          github_token != '' and
-          github_user != ''
-        else 
+      force_basic_auth: "{{ true
+        if
+          github_token is defined and
+          github_user is defined and
+          github_token|length > 0 and
+          github_user|length > 0
+        else
           false }}"
     register: json_reponse
 
@@ -21,13 +21,13 @@
       dest: /tmp/bashrc.tar.gz
       username: "{{ github_user }}"
       password: "{{ github_token }}"
-      force_basic_auth: "{{ true 
-      if 
-        github_token is defined and 
-        github_user is defined and 
-        github_token != '' and
-        github_user != ''
-      else 
+      force_basic_auth: "{{ true
+      if
+        github_token is defined and
+        github_user is defined and
+        github_token|length > 0 and
+        github_user|length > 0
+      else
         false }}"
 
   - name: Set bashrc location
