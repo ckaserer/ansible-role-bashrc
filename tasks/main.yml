@@ -3,12 +3,16 @@
     uri:
       url: https://api.github.com/repos/ckaserer/bashrc/releases/latest
       return_content: true
+      user: "{{ github_user }}"
+      password: "{{ github_token }}"
     register: json_reponse
 
   - name: Get latest bashrc release tar.gz
     get_url:
       url: "{{ json_reponse.json.tarball_url }}"
       dest: /tmp/bashrc.tar.gz
+      username: "{{ github_user }}"
+      password: "{{ github_token }}"
 
   - name: Set bashrc location
     set_fact:

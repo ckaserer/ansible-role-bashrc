@@ -5,4 +5,7 @@
       - name: "Include ansible role"
         include_role:
           name: "ansible-role-bashrc"
+        vars:
+          github_user: "ckaserer"
+          github_token: "{{ lookup('env','GITHUB_TOKEN') }}"
 ...

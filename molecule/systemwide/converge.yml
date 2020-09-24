@@ -9,4 +9,6 @@
             become: true
         vars:
           systemwide: true
+          github_user: "ckaserer"
+          github_token: "{{ lookup('env','GITHUB_TOKEN') }}"
 ...
