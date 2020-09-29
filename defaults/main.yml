@@ -1,7 +1,5 @@
 ---
 systemwide: false
-
-# To avoid hitting github api rate limits you can authenticate the request by setting
-# github_user: ckaserer
-# github_token: abcdef123456
+github_user: ""
+github_token: ""
 ...
