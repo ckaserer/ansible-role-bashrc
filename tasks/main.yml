@@ -12,8 +12,6 @@
       password: "{{ github_token }}"
       force_basic_auth: "{{ true
         if
-          github_token is defined and
-          github_user is defined and
           github_token|length > 0 and
           github_user|length > 0
         else
@@ -28,8 +26,6 @@
       password: "{{ github_token }}"
       force_basic_auth: "{{ true
       if
-        github_token is defined and
-        github_user is defined and
         github_token|length > 0 and
         github_user|length > 0
       else
